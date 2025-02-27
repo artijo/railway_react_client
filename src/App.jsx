@@ -29,7 +29,7 @@ function App() {
   const handleAddUser = async (userData) => {
     try {
       const newUser = await addUser(userData)
-      setUsers([...users, newUser])
+      fetchUsers()
       return true
     } catch (err) {
       setError('Failed to add user')

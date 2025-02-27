@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import UserList from './components/UserList'
 import UserForm from './components/UserForm'
 import { getUsers, addUser } from './services/userService'
-import './App.css'
 
 function App() {
   const [users, setUsers] = useState([])
@@ -40,18 +39,24 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>User Management</h1>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <h1 className="text-3xl font-bold mb-6 text-center text-indigo-700">User Management</h1>
       
-      {error && <div className="error">{error}</div>}
+      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
       
-      <UserForm onAddUser={handleAddUser} />
+      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+        <UserForm onAddUser={handleAddUser} />
+      </div>
       
-      {loading ? (
-        <p>Loading users...</p>
-      ) : (
-        <UserList users={users} />
-      )}
+      <div className="bg-white shadow-md rounded-lg p-6">
+        {loading ? (
+          <div className="flex justify-center items-center py-8">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-500"></div>
+          </div>
+        ) : (
+          <UserList users={users} />
+        )}
+      </div>
     </div>
   )
 }
